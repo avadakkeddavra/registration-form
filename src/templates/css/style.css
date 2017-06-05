@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+body{
+    background-color: #242f3e !important;
+}
+#map{
+    width: 100%;
+    height: 450px;
+}
+form{
+    width: 60%;
+    margin: 40px auto !important;
+    padding: 20px 40px;
+    background-color: #38414e !important;
+}
+h3{
+    color: #d59563 !important;
+    text-align: center !important;
+    padding: 40px 0px !important;
+}
+form label{
+    color: #ffffff !important;
+}
+form input:not([type='file']),  form select, form textarea{
+    border-radius: 0px !important;
+    border:none !important;
+    background-color: transparent !important;
+    border-bottom: 2px solid #d59563 !important;
+    color: #bdbdbd !important;
+}
+form input[type='file']{
+    background-color: transparent !important;
+    border:none !important;
+    color: #bdbdbd !important;
+}
+form input::-webkit-input-placeholder, form select::-webkit-input-placeholder{
+    color: #bdbdbd !important;
+}
+form button[type="submit"] {
+    background-color: #d59563 !important;
+    color: #ffffff !important;
+}
