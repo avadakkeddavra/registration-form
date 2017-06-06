@@ -1,5 +1,4 @@
-<?php require_once 'header.php'; ?>
-    <div class="share42init"></div>
+
 <h3>To participate in the conference, please fill out the form</h3>
 <form role="form" method="post" enctype="multipart/form-data">
 
@@ -34,4 +33,3 @@
 
     <button type="submit" id="nextSocial" name="nextSocial" class="btn btn-default">Next</button>
 </form>
-<?php require_once 'footer.php'; ?>

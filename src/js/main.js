@@ -1,125 +1,57 @@
-$(document).ready(function(){
-    $('input#birth_date').datepicker({
-        dateFormat: "yy-mm-dd"
-    });
-})
 
-$(document).ready(function(){
-    $('input, textarea').not('#birth_date').unbind().blur(function(e){
-        var item = $(this).attr('id');
-        var value = $(this).val();
-
-        if(item == 'first_name' || item == 'last_name' || item == 'report_subject' || item == 'company' || item == 'position')
-        {
-            var rv_name = /^[a-zA-Zа-яА-Я]+$/;
-
-            if(value.length > 2 && value != '' && rv_name.test(value))
-            {
-                $(this).removeClass('error');
-                $(this).addClass('not_error');
-                $(this).next('.error-box').text('Принято')
-                    .css('color','green')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-            else{
-                $(this).removeClass('not_error').addClass('error');
-                $(this).next('.error-box').html('Invalid input <br /> * min quantity of letters - 2 <br /> * without spaces symobls')
-                    .css('color','#d59563')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-        }
-
-        if(item == 'phone')
-        {
-            var rv_name = /[+1][\s](\(\d{3}\)[\s ])(\d{3}[\-]\d{4})/;
-
-            if(value != '' && rv_name.test(value))
-            {
-                $(this).removeClass('error');
-                $(this).addClass('not_error');
-                $(this).next('.error-box').text('Принято')
-                    .css('color','green')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-            else{
-                $(this).removeClass('not_error').addClass('error');
-                $(this).next('.error-box').html('Invalid input <br /> * not right format')
-                    .css('color','#d59563')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-        }
-        if(item == 'email')
-        {
-            var rv_name = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
-            if(value != '' && rv_name.test(value))
-            {
-                $(this).removeClass('error');
-                $(this).addClass('not_error');
-                $(this).next('.error-box').text('Принято')
-                    .css('color','green')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-            else{
-                $(this).removeClass('not_error').addClass('error');
-                $(this).next('.error-box').html('Invalid input email <br /> * not right format')
-                    .css('color','#d59563')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-        }
-        if(item == 'about')
-        {
-            if(value !='' && value.length < 1000) {
-                $(this).addClass('not_error');
-                $(this).next('.error-box').text('Принято')
-                    .css('color', 'green')
-                    .animate({'paddingLeft': '10px'}, 400)
-                    .animate({'paddingLeft': '5px'}, 400);
-            }
-            else{
-                $(this).removeClass('not_error').addClass('error');
-                $(this).next('.error-box').html('Invalid input text <br /> * too many or too low letters')
-                    .css('color','#d59563')
-                    .animate({'paddingLeft':'10px'},400)
-                    .animate({'paddingLeft':'5px'},400);
-            }
-        }
-    })
-})
-
-
+console.log(location.pathname);
 $(document).ready(function(){
     $('form button#next').click(function(e){
         e.preventDefault();
+        var url = location.href+'main/secondForm';
+        console.log(url);
+        var formData = $('form').serialize();
 
-        if( $('.error').length == 0)
+        if( $('.error').length == 0 && $('.not_error').length == 5 || $('.not_error').length == 3)
         {
-            var formData = $('form').serialize();
-            // var data = $('form').serialize();
+
             console.log(formData);
              $.ajax({
-                 url : '/send',
+                 url : 'main/secondForm/ajax',
                  type: 'POST',
                  data : formData,
                  success: function(response) {
-                     if (response == true)
-                     {
-                         document.location.href='/send/nextPage';
-                     }
 
+                        $('#form-container').html(response);
                  }
-             })
+             });
+            if(url != window.location){
+                window.history.pushState(null, null, url);
+            }
         }
+        else{
+
+            $(this).prev('.error-box').html('Please check all the fields <br /> * ')
+                .css('color','#d59563')
+                .animate({'paddingLeft':'10px'},400)
+                .animate({'paddingLeft':'5px'},400);
+        }
+        return false;
     })
 })
 
 
-
+$(window).bind('popstate', function() {
+    var url = location.pathname;
+    if(url == '/')
+    {
+        url+= 'main/index/';
+    }
+    else{
+        url = url+'/ajax';
+    }
+    $.ajax({
+        url: url,
+        success: function(data) {
+            $('#form-container').html(data);
+        }
+    });
+});
 
 
 
@@ -134,6 +66,7 @@ $(document).ready(function(){
     // });
 
     $('.upload').on('click', function(e){
+        e.stopPropagation();
         e.preventDefault();
 
 
@@ -143,7 +76,7 @@ $(document).ready(function(){
         // var data = $('form').serialize();
             console.log(data);
             $.ajax({
-                url : '/send/uploadPhoto',
+                url : '/main/uploadPhoto',
                 type: 'POST',
                 data : data,
                 cache: false,
@@ -168,6 +101,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('form button#nextSocial').click(function(e){
         e.preventDefault();
+        var url = '/main/secondData';
 
         if( $('.error').length == 0)
         {
@@ -176,15 +110,18 @@ $(document).ready(function(){
             formData += user_img;
             console.log(formData);
             $.ajax({
-                url : '/send',
+                url : '/main/secondData/ajax',
                 type: 'POST',
                 data : formData,
-                success: function(response) {
+                success: function(data) {
 
-                   alert(response);
+                    $('#form-container').html(data);
 
                 }
-            })
+            });
+            if(url != window.location){
+                window.history.pushState(null, null, url);
+            }
         }
     })
 })

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css">
-    <link rel="stylesheet" href="/templates/css/jquery-ui.css">
+    <link rel="stylesheet" href="/templates/css/jquery-ui.css"
     <title>Document</title>
 </head>
 <body>
