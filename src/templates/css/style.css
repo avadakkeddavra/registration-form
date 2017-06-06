@@ -48,3 +48,49 @@ form button[type="submit"] {
     background-color: #d59563 !important;
     color: #ffffff !important;
 }
+input#photo{
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+}
+.photo-upload-icon{
+    width:100px;
+    display: block !important;
+    opacity: 1 !important;
+    height: 100px;
+    border:1px solid #fff;
+    border-radius:50%;
+    background-color: transparent !important;
+    position: relative;
+    overflow: hidden;
+}
+.photo-upload-icon:after{
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 1px;
+    top: 50%;
+    z-index: 0;
+    left: 50%;
+    margin: -10px 0px;
+    background-color: #fff;
+}
+.photo-upload-icon:before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    top: 50%;
+    left: 50%;
+    margin: 0px -10px;
+    z-index: 0;
+    background-color: #fff;
+}
+.user-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    z-index: 1;
+}

@@ -9,7 +9,7 @@ class MainController extends Controller
 {
 	public function indexAction()
 	{
-		$this->view->generate('home','index.php');
+		$this->view->generate('home','first-form.php');
 	}
 }
  ?>
