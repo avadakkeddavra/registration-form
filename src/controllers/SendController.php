@@ -8,16 +8,18 @@ class SendController extends Controller
 {
 	public function indexAction()
 	{
-		print_r($_POST);
-//		echo true;
+        $this->view->generate('home','index.php');
 
 	}
 	public function nextPageAction()
 	{
-		print_r($_POST);
-		$this -> view -> generate('nextPage', 'second-form.php');
+        //$this->view->generate('home','index.php');
+        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\second-form.php');
+        echo $file;
+
 	}
-	public function uploadPhotoAction() {
+	public function uploadPhotoAction()
+    {
 
 		$data = array();
 

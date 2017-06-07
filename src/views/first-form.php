@@ -1,4 +1,4 @@
-<?php require_once 'header.php'; ?>
+
 
 <h3>To participate in the conference, please fill out the form</h3>
 <form role="form" method="post">
@@ -273,6 +273,6 @@
                placeholder="Email">
         <div class="error-box"></div>
     </div>
+    <div class="error-box"></div>
     <button type="submit" id="next" class="btn btn-default">Next</button>
 </form>
-<?php require_once 'footer.php'; ?>
