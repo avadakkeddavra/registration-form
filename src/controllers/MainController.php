@@ -33,7 +33,19 @@ class MainController extends Controller
         $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\second-form.php');
 		if($ajax == 'ajax')
 		{
-            echo $file;
+//            echo $file;
+            $status = MainController::checkFirstFormDataAction();
+            if(is_string($status))
+            {
+            	echo $status;
+            }
+            else
+            {
+            	$LoginModel = new LoginModel();
+            	$answer = $LoginModel -> addMember($status);
+				echo $file;
+            }
+
 		}
 		else
 		{
@@ -49,11 +61,23 @@ class MainController extends Controller
         $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\social.php');
         if($ajax == 'ajax')
         {
-            echo $file;
+            $status = MainController::checkSecondFormDataAction();
+            $email = $_SESSION['email'];
+
+            if(is_string($status))
+            {
+            	echo $status;
+            }
+            else{
+	            $LoginModel = new LoginModel();
+	            $answer = $LoginModel -> updateMember($status,$email);
+
+	            echo $answer;
+            }
         }
         else
         {
-            $this->view->generate('home','index.php', $file);
+            header('Location: http://form.local/');
         }
 	}
     public function uploadPhotoAction()
@@ -87,6 +111,105 @@ class MainController extends Controller
             echo json_encode( $data );
 
         }
+    }
+    public static function checkFirstFormDataAction()
+    {
+
+	    $data = [];
+
+		if(textValidation($_POST['first_name']) == true)
+		{
+			$data['first_name'] = $_POST['first_name'];
+		}
+		else{
+			return 'First name error';
+		}
+	    if(textValidation($_POST['last_name']) == true)
+	    {
+		    $data['last_name'] = $_POST['last_name'];
+	    }
+	    else{
+		    return 'Last name error';
+	    }
+	    if (textValidation($_POST['report_subject']) == true)
+	    {
+		    $data['report_subject'] = $_POST['report_subject'];
+	    }
+	    else{
+		    return 'Report subject error';
+	    }
+	    if (phoneValidation($_POST['phone']) == true)
+	    {
+		    $data['phone'] = $_POST['phone'];
+	    }
+	    else{
+		    return 'Phone error';
+	    }
+	    if (dateValidation($_POST['birth_date']) == true)
+	    {
+		    $data['birth_date'] = $_POST['birth_date'];
+	    }else{
+		    return 'date error';
+	    }
+	    if(isset($_POST['country']))
+	    {
+	    	$data['country'] = $_POST['country'];
+	    }
+	    else{
+			return 'Country error';
+	    }
+	    if(emailValidation($_POST['email']) == true)
+	    {
+		    $data['email'] = $_POST['email'];
+	    }else{
+			return 'Error data';
+	    }
+		return $data;
+		//$login_model = new LoginModel();
+    }
+
+    public static function checkSecondFormDataAction()
+    {
+    	$data = [];
+    	$data['photo'] = $_POST['photo'];
+		if(textareaValidation($_POST['company']) == true)
+		{
+			$data['company'] = $_POST['company'];
+		}
+		else{
+			return 'Company error';
+		}
+		if(textareaValidation($_POST['position']) == true)
+		{
+			$data['position'] = $_POST['position'];
+		}
+		else{
+			return 'Position error';
+		}
+		if(textareaValidation($_POST['about']) == true)
+		{
+			$data['about'] = $_POST['about'];
+		}
+		else{
+			return 'About error';
+		}
+		return $data;
+    }
+    public function checkEmailAction()
+    {
+		$loginModel = new LoginModel();
+		$data = $loginModel->checkEmail($_POST['email']);
+	    if($data == false)
+	    {
+		    echo 1;
+	    }
+	    else{
+		    echo 0;
+	    }
+
+		$_SESSION['email'] = $_POST['email'];
+
+
     }
 }
  ?>

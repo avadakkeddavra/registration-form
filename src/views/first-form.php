@@ -1,6 +1,7 @@
 
 
 <h3>To participate in the conference, please fill out the form</h3>
+
 <form role="form" method="post">
 
     <div class="form-group">
@@ -264,13 +265,13 @@
 
     <div class="form-group">
         <label for="phone">Phone</label>
-        <input type="tel" pattern="[0-9_-]{10}"  placeholder="Format: +1 (555) 555-5555" class="form-control" id="phone" name="phone">
+        <input type="tel"  placeholder="Format: +1 (555) 555-5555" class="form-control" id="phone" name="phone">
         <div class="error-box"></div>
     </div>
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" name="email"
-               placeholder="Email">
+               placeholder="Email" data-status="">
         <div class="error-box"></div>
     </div>
     <div class="error-box"></div>

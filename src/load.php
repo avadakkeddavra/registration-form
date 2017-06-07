@@ -21,6 +21,7 @@ class Loader
 		{
 			$pref_file = 'models/';
 		}
+
 		
 
 		$file = $pref_file . array_shift($arr) .'.php';

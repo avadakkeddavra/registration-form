@@ -1,6 +1,7 @@
 
 <h3>To participate in the conference, please fill out the form</h3>
-<form role="form" method="post" enctype="multipart/form-data">
+<div id=""></div>
+<form role="form" id="second_form" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
         <label for="company">Company</label>
@@ -26,10 +27,11 @@
     <div class="form-group">
         <label for="photo">Photo</label>
             <span class="photo-upload-icon"><input type="file" class="form-control" name="photo" id="photo" multiple="multiple" accept="image/*"><img
-                        src="" class="user-img" alt=""></span>
-        <a href="#" class="upload">Upload</a>
-        <div class="error-box"></div>
-    </div>
+                        src="" class="user-img" alt=""><div class="error-box"></div></span>
+        <span class="upload btn-template">Upload</span>
 
+    </div>
+    <div class="error-box"></div>
     <button type="submit" id="nextSocial" name="nextSocial" class="btn btn-default">Next</button>
 </form>
+</div>

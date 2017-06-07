@@ -7,7 +7,7 @@ $(document).ready(function(){
         console.log(url);
         var formData = $('form').serialize();
 
-        if( $('.error').length == 0 && $('.not_error').length == 5 || $('.not_error').length == 3)
+        if( $('.error').length == 0 && $('.not_error').length == 5)
         {
 
             console.log(formData);
@@ -23,6 +23,7 @@ $(document).ready(function(){
             if(url != window.location){
                 window.history.pushState(null, null, url);
             }
+            return false;
         }
         else{
 
@@ -31,27 +32,27 @@ $(document).ready(function(){
                 .animate({'paddingLeft':'10px'},400)
                 .animate({'paddingLeft':'5px'},400);
         }
-        return false;
+
     })
 })
 
 
-$(window).bind('popstate', function() {
-    var url = location.pathname;
-    if(url == '/')
-    {
-        url+= 'main/index/';
-    }
-    else{
-        url = url+'/ajax';
-    }
-    $.ajax({
-        url: url,
-        success: function(data) {
-            $('#form-container').html(data);
-        }
-    });
-});
+// $(window).bind('popstate', function() {
+//     var url = location.pathname;
+//     if(url == '/')
+//     {
+//         url+= 'main/index/';
+//     }
+//     else{
+//         url = url+'/ajax';
+//     }
+//     $.ajax({
+//         url: url,
+//         success: function(data) {
+//             $('#form-container').html(data);
+//         }
+//     });
+// });
 
 
 
@@ -65,7 +66,7 @@ $(document).ready(function(){
     //     console.log(files);
     // });
 
-    $('.upload').on('click', function(e){
+    $('#form-container').on('click','.upload', function(e){
         e.stopPropagation();
         e.preventDefault();
 
@@ -84,7 +85,7 @@ $(document).ready(function(){
                 processData: false, // Не обрабатываем файлы (Don't process the files)
                 contentType: false, // Так jQuery скажет серверу что это строковой запрос
                 success: function( data ){
-                    alert(data['files']);
+
                     $('.user-img').attr('src','/img/'+data['files']);
                     $('.user-img').fadeIn();
                 },
@@ -99,14 +100,16 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-    $('form button#nextSocial').click(function(e){
+    $('#form-container').on('click','#nextSocial', function(e){
         e.preventDefault();
         var url = '/main/secondData';
 
-        if( $('.error').length == 0)
+        if( $('.error').length == 0 &&  $('.not_error').length == 3)
         {
             var formData = $('form').serialize();
-            var user_img = '&photo='+$('#photo').val();
+            var photo = $('#photo').val().split('\\');
+            photo = photo[photo.length-1];
+            var user_img = '&photo='+photo;
             formData += user_img;
             console.log(formData);
             $.ajax({
@@ -123,5 +126,12 @@ $(document).ready(function(){
                 window.history.pushState(null, null, url);
             }
         }
+        else{
+            $(this).prev('.error-box').html('Please check all the fields <br /> * ')
+                .css('color','#d59563')
+                .animate({'paddingLeft':'10px'},400)
+                .animate({'paddingLeft':'5px'},400);
+        }
+        return false;
     })
 })
