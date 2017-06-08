@@ -21,10 +21,6 @@ class MainController extends Controller
             $this->view->generate('home','index.php',$file);
 		}
 
-
-
-
-
 	}
     public function secondFormAction()
     {
@@ -37,13 +33,19 @@ class MainController extends Controller
             $status = MainController::checkFirstFormDataAction();
             if(is_string($status))
             {
-            	echo $status;
+            	echo "<span class='error'>$status</span>";
             }
             else
             {
             	$LoginModel = new LoginModel();
             	$answer = $LoginModel -> addMember($status);
-				echo $file;
+            	if($answer != false)
+	            {
+		            echo $file;
+	            }
+				else{
+            		echo '<span class="error">data base request error</span>';
+				}
             }
 
 		}
@@ -71,12 +73,18 @@ class MainController extends Controller
             else{
 	            $LoginModel = new LoginModel();
 	            $answer = $LoginModel -> updateMember($status,$email);
-
-	            echo $answer;
+	            if($answer != false)
+	            {
+		            echo $file;
+	            }
+	            else{
+		            echo '<span class="error">data base request error</span>';
+	            }
             }
         }
         else
         {
+//	        $this->view->generate('home','index.php',$file);
             header('Location: http://form.local/');
         }
 	}
@@ -210,6 +218,16 @@ class MainController extends Controller
 		$_SESSION['email'] = $_POST['email'];
 
 
+    }
+    public function allMembersAction()
+    {
+    	$loginModel = new LoginModel();
+    	$data = $loginModel -> getAllItems('members');
+    	if($data == false)
+	    {
+		    $data = '<span class="error">data base request error</span>';
+	    }
+	    $this -> view -> generate('all members', 'all_members.php',$data);
     }
 }
  ?>

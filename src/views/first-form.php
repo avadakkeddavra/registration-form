@@ -1,7 +1,7 @@
 
 
 <h3>To participate in the conference, please fill out the form</h3>
-
+<a href="/main/allMembers" class="btn-template all-members">All Members</a>
 <form role="form" method="post">
 
     <div class="form-group">

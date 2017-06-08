@@ -1,5 +1,6 @@
 
 <h3>To participate in the conference, please fill out the form</h3>
+<a href="/main/allMembers" class="btn-template all-members">All Members</a>
 <div id=""></div>
 <form role="form" id="second_form" method="post" enctype="multipart/form-data">
 

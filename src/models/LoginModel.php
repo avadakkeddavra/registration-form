@@ -24,7 +24,6 @@
         	$sql = "UPDATE members 
 					SET company = :company , position = :position , about = :about, photo = :photo   
 					WHERE email = :email";
-        	echo $sql;
         	return self::$query->execute($sql,$data);
         }
 

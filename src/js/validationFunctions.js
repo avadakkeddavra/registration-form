@@ -1,6 +1,5 @@
 function textValidation(obj,value)
 {
-    console.log($(this).next('.error-box').html());
     var rv_name = /^[a-zA-Zа-яА-Я]+$/;
 
     if(value.length > 2 && value != '' && rv_name.test(value))
@@ -22,7 +21,6 @@ function textValidation(obj,value)
 }
 function emailValidation(obj,value)
 {
-
         $.ajax({
             url: '/main/checkEmail',
             data:'email='+value,
@@ -31,7 +29,7 @@ function emailValidation(obj,value)
                 obj.attr('data-status',data);
                 if(obj.attr('data-status') == 0)
                 {
-                    console.log(data);
+
                     obj.removeClass('not_error').addClass('error');
                     obj.next('.error-box').html('This email has already used <br />')
                         .css('color','#d59563')

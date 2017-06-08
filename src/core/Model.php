@@ -17,7 +17,7 @@ class Model
 
 	public function getAllItems($tablename)
 	{
-		return self::$query->queryAll('SELECT * from ' . $tablename . '');
+		return self::$query->queryAll('SELECT * from ' . $tablename . ' ORDER by id DESC');
 	}
 	public function getOneItemById($tablename, $id)
 	{

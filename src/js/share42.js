@@ -26,8 +26,8 @@
                 }
                 f = path('share42.js');
             }
-            if (!u) u = location.href;
-            if (!t) t = document.title;
+            if (!u) u = document.getElementById('form-link'); u = u.value;
+            if (!t) t = document.getElementById('tw-share'); t = t.value;
             if (!fn) fn = 'icons.png';
 
             function desc() {

@@ -1,16 +1,8 @@
 $(document).ready(function(){
-    $('input#birth_date').datepicker({
-        dateFormat: "yy-mm-dd"
-    });
-});
-
-
-$(document).ready(function(){
-    $('input , textarea').not('#birth_date').unbind().blur(function(e){
+    $('#form-container').on('blur','input',function(e){
         var item = $(this).attr('id');
         var value = $(this).val();
-        console.log(item);
-        if(item == 'first_name' || item == 'last_name' || item == 'report_subject' || item == 'company' || item == 'position')
+        if(item == 'first_name' || item == 'last_name' || item == 'report_subject')
         {
             textValidation($(this),value);
         }
@@ -23,18 +15,10 @@ $(document).ready(function(){
         {
             emailValidation($(this),value);
         }
-        if(item == 'about')
-        {
-            textareaValidation($(this),value);
-        }
-        if(item == 'file')
-        {
-            fileValidation($(this),value);
-        }
     })
 });
 $(document).ready(function(){
-    $('#form-container').on('focusout','#company, #about,#position, #photo',function(e){
+    $('#form-container').on('blur','#company, #about,#position, #photo',function(e){
 
         var item = $(this).attr('id');
         var value = $(this).val();
