@@ -7,7 +7,8 @@ class Loader
 		$arr = explode('\\', $class_name);
 		
 		$prefix = array_shift($arr);
-
+		//echo $class_name;
+		// echo $prefix;
 
 		if($prefix == 'core')
 		{
@@ -24,16 +25,20 @@ class Loader
 
 		
 
-		$file = $pref_file . array_shift($arr) .'.php';
-
+		$file = $pref_file . ucfirst(array_shift($arr)) .'.php';
+	
 		if(is_file($file))
 		{
 				//echo $file;
 				require_once $file;
 		}
-			
+		else
+		{
+			echo 'no file';
+		}
 		
 	}
+		
 }
 
  ?>

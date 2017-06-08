@@ -10,7 +10,7 @@ class MainController extends Controller
 	public function indexAction()
 	{
 		$uri = explode('/',$_SERVER['REQUEST_URI']);
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\first-form.php');
+        $file = file_get_contents('views/first-form.php');
 		$ajax = $uri[count($uri)-1];
 		if($ajax == 'ajax')
 		{
@@ -22,11 +22,11 @@ class MainController extends Controller
 		}
 
 	}
-    public function secondFormAction()
+	public function secondFormAction()
     {
         $uri = explode('/',$_SERVER['REQUEST_URI']);
         $ajax = $uri[count($uri)-1];
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\second-form.php');
+        $file = file_get_contents('http://solodukhin-as.groupbwt.com/views/second-form.php');
 		if($ajax == 'ajax')
 		{
 //            echo $file;
@@ -60,7 +60,7 @@ class MainController extends Controller
 	{
         $uri = explode('/',$_SERVER['REQUEST_URI']);
         $ajax = $uri[count($uri)-1];
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\social.php');
+        $file = file_get_contents('views/social.php');
         if($ajax == 'ajax')
         {
             $status = MainController::checkSecondFormDataAction();
@@ -84,7 +84,7 @@ class MainController extends Controller
         }
         else
         {
-//	        $this->view->generate('home','index.php',$file);
+	        //$this->view->generate('home','index.php',$file);
             header('Location: http://form.local/');
         }
 	}
@@ -229,5 +229,6 @@ class MainController extends Controller
 	    }
 	    $this -> view -> generate('all members', 'all_members.php',$data);
     }
+  
 }
  ?>

@@ -8,14 +8,14 @@
         <label for="company">Company</label>
         <input type="text" class="form-control" id="company"
                name="company"
-               placeholder="Company">
+               placeholder="Company" maxlength="256">
         <div class="error-box"></div>
     </div>
     <div class="form-group">
         <label for="position">Position</label>
         <input type="text" class="form-control" id="position"
                name="position"
-               placeholder="Position">
+               placeholder="Position" maxlength="256">
         <div class="error-box"></div>
     </div>
     <div class="form-group">
@@ -33,6 +33,6 @@
 
     </div>
     <div class="error-box"></div>
-    <button type="submit" id="nextSocial" name="nextSocial" class="btn btn-default">Next</button>
+    <button type="submit" id="nextSocial" name="nextSocial" class="btn btn-primary">Next</button>
 </form>
 </div>

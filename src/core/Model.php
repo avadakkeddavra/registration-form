@@ -10,7 +10,7 @@ class Model
 
 	public function __construct()
 	{
-		self::$db = DB::connect('mysql:dbname=form;host=localhost;charset=UTF8', 'root', '','');
+		self::$db = DB::connect('mysql:dbname=form;host=localhost;charset=UTF8', 'root','');
     	self::$query = new DBQuery(self::$db);
 	}
 

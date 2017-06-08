@@ -1,8 +1,19 @@
 function textValidation(obj,value)
 {
-    var rv_name = /^[a-zA-Zа-яА-Я]+$/;
+    var id = obj.attr('id');
 
-    if(value.length > 2 && value != '' && rv_name.test(value))
+    if( id == 'first_name' || id == 'last_name')
+    {
+        var rv_name = /^[A-z]+[']?[A-z]+$/;
+        var message = 'Incorrect ' + obj.attr('placeholder') + ' input. <br> Example: Alexey, Mc\'donald';
+    }
+    if(id == 'report_subject')
+    {
+        var rv_name = /^[A-z]*[\s]?[A-z]*$/;
+    }
+
+
+    if(value.length > 2 && value.length < 256 && value != '' && rv_name.test(value))
     {
         obj.removeClass('error');
         obj.addClass('not_error');
@@ -13,7 +24,7 @@ function textValidation(obj,value)
     }
     else{
         obj.removeClass('not_error').addClass('error');
-        obj.next('.error-box').html('Invalid input <br /> * min quantity of letters - 2 <br /> * without spaces symobls')
+        obj.next('.error-box').html('Incorrect ' + obj.attr('placeholder') + ' input. <br> Example: Alexey, Mc\'donald')
             .css('color','#d59563')
             .animate({'paddingLeft':'10px'},400)
             .animate({'paddingLeft':'5px'},400);
@@ -118,4 +129,8 @@ function fileValidation(obj,value)
             .animate({'paddingLeft':'10px'},400)
             .animate({'paddingLeft':'5px'},400);
     }
+}
+function dataValidetion()
+{
+    
 }

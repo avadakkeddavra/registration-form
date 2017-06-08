@@ -8,9 +8,7 @@
     -o-transition: 0.3s;
     transition: 0.3s;
 }
-body{
-    background-color: #242f3e !important;
-}
+
 .btn-template{
     display: block;
     width: 150px;
@@ -28,7 +26,7 @@ body{
     background-color: #3c4a59 !important;
     color: #d59563;
 }
-.error{
+span.error{
     color: red !important;
 }
 #map{
@@ -39,13 +37,12 @@ form{
     width: 60%;
     margin: 40px auto !important;
     padding: 20px 40px;
-    background-color: #38414e !important;
+
 }
 h2{
     font-size: 30px;
     text-transform: uppercase;
     font-weight: bold !important;
-    color: #d59563 !important;
     text-align: center;
     padding-top: 20px !important;
     display: block !important;
@@ -63,19 +60,12 @@ h2:after{
     font-weight: lighter;
 }
 h3{
-    color: #d59563 !important;
     text-align: center !important;
     padding: 40px 0px !important;
 }
-form label{
-    color: #ffffff !important;
-}
+
 form input:not([type='file']),  form select, form textarea{
-    border-radius: 0px !important;
-    border:none !important;
-    background-color: transparent !important;
-    border-bottom: 2px solid #d59563 !important;
-    color: #bdbdbd !important;
+
 }
 form input[type='file']{
     background-color: transparent !important;
@@ -86,8 +76,7 @@ form input::-webkit-input-placeholder, form select::-webkit-input-placeholder{
     color: #bdbdbd !important;
 }
 form button[type="submit"] {
-    background-color: #d59563 !important;
-    color: #ffffff !important;
+
 }
 input#photo{
     opacity: 0;
@@ -140,12 +129,12 @@ input#photo{
     padding: 40px;
 }
 .container-fluid table{
-    color: #ffffff !important;
+    color: #444 !important;
     margin: 40px auto;
     width: 50% ;
 }
 .container-fluid table thead{
-    background-color: #3a4758;
+
 }
 .container-fluid table img{
     width: 80px;

@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $('#form-container').on('focus','#birth_date',function(){
         $(this).datepicker({
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy-mm-dd",
+            maxDate: "2000-12-31"
         });
     })
 });
