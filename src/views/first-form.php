@@ -6,29 +6,29 @@
 
     <div class="form-group">
         <label for="firstName">First name</label>
-        <input type="text" class="form-control" id="first_name"
+        <input type="text" pattern="[A-z]+['?]?[A-z]+" class="form-control" id="first_name"
                name="first_name"
-               placeholder="First Name">
+               placeholder="First Name" maxlength="256">
         <div class="error-box"></div>
     </div>
     <div class="form-group">
         <label for="lastName">Last name</label>
         <input type="text" class="form-control" id="last_name"
                name="last_name"
-               placeholder="Last Name">
+               placeholder="Last Name" maxlength="256">
         <div class="error-box"></div>
     </div>
     <div class="form-group">
         <label for="birthdate">Birth date</label>
         <input type="text" class="form-control" name="birth_date"
-               id="birth_date">
+               id="birth_date" max="2000-12-31">
         <div class="error-box"></div>
     </div>
 
     <div class="form-group">
         <label for="report_subject">Report subject</label>
         <input type="text" class="form-control" name="report_subject" id="report_subject"
-               placeholder="Report subject">
+               placeholder="Report subject" maxlength="256">
         <div class="error-box"></div>
     </div>
 
@@ -275,5 +275,5 @@
         <div class="error-box"></div>
     </div>
     <div class="error-box"></div>
-    <button type="submit" id="next" class="btn btn-default">Next</button>
+    <button type="submit" id="next" class="btn btn-primary">Next</button>
 </form>

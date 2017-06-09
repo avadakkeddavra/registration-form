@@ -1,6 +1,6 @@
 function textValidation(obj,value)
 {
-    var rv_name = /^[a-zA-Zа-яА-Я]+$/;
+    var rv_name = /[A-z]+['?]?[A-z]+/;
 
     if(value.length > 2 && value != '' && rv_name.test(value))
     {
@@ -118,4 +118,8 @@ function fileValidation(obj,value)
             .animate({'paddingLeft':'10px'},400)
             .animate({'paddingLeft':'5px'},400);
     }
+}
+function dataValidetion()
+{
+    
 }
