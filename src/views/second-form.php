@@ -1,6 +1,6 @@
 
 <h3>To participate in the conference, please fill out the form</h3>
-<a href="/main/allMembers" class="btn-template all-members">All Members</a>
+<a href="/main/allMembers/0" class="btn-template all-members">All Members</a>
 <div id=""></div>
 <form role="form" id="second_form" method="post" enctype="multipart/form-data">
 
@@ -21,7 +21,7 @@
     <div class="form-group">
         <label for="about">About me</label>
         <textarea type="text" class="form-control" name="about"
-                  id="about"></textarea>
+                  id="about" maxlength="1000"></textarea>
         <div class="error-box"></div>
     </div>
 

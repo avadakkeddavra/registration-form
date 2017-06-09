@@ -10,7 +10,7 @@
 
 
 			<?php
-				foreach($data as $item)
+				foreach($data['members'] as $item)
 				{
 					if($item['photo'] == '')
 					{
@@ -27,5 +27,15 @@
 			?>
 
 	</table>
+    <div class="tabs-pagination">
+    <?php
+        for($i = 0; $i < $data['tabs']; $i++)
+        {
+            echo '<a href="/main/allMembers/'. $i . '" class="btn btn-default">' . $i . '</a>';
+        }
+
+    ?>
+    </div>
+
 </div>
 <?php include_once 'footer.php';?>

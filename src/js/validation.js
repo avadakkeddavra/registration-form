@@ -9,7 +9,7 @@ $(document).ready(function(){
 
         if(item == 'phone')
         {
-            phoneValidation($(this),value);
+           $(this).mask("+7 (999) 999-9999");
         }
         if(item == 'email')
         {

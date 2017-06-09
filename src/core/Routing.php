@@ -24,24 +24,24 @@ class Routing
 
 		$actionName = $actionName .'Action' ;
 
-		if(class_exists($controller) == true)
-		{
+		// if(class_exists($controller) == true)
+		// {
 			$controller = new $controller();
 
-			if(method_exists($controller,$actionName) == true)
-			{
+		// 	if(method_exists($controller,$actionName) == true)
+		// 	{
 				$controller -> $actionName();
-			}
-			else{
-				$controller = new ErrorController();
-				$controller -> indexAction();
-			}
+		// 	}
+		// 	else{
+		// 		$controller = new ErrorController();
+		// 		$controller -> indexAction();
+		// 	}
 
-		}
-		else{
-			$controller = new ErrorController();
-			$controller -> indexAction();
-		}
+		// }
+		// else{
+		// 	$controller = new ErrorController();
+		// 	$controller -> indexAction();
+		// }
 
 
 	}	

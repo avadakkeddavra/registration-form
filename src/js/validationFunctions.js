@@ -1,8 +1,33 @@
 function textValidation(obj,value)
 {
-    var rv_name = /[A-z]+['?]?[A-z]+/;
+    var rv_name = /^([A-z]+[']?)[A-z]+$/;
+    var id = obj.attr('id');
 
-    if(value.length > 2 && value != '' && rv_name.test(value))
+    if( id == 'first_name' || id == 'last_name')
+    {
+        var rv_name = /^[A-z]+[']?[A-z]+$/;
+        var message = 'Example: Alexey, Mc\'donald';
+    }
+    if(id == 'report_subject')
+    {
+        var rv_name = /^(([A-z]*['?]?)[\s]?[A-z]*)*$/;
+        var message = 'Example: theory of physical proccesses it\'s';
+    }
+    if(id == 'company')
+    {
+        var rv_name = /^(([A-z]*['?]?)[\s]?[A-z]*)*$/;
+        var message = 'Example: Noosphere, Collaboratory Corp;';
+    }
+    if(id == 'about')
+    {
+        var message = 'Your message must not exceed 1000 characters';
+    }
+    if(id == 'position')
+    {
+        var rv_name = /^.?[A-z\s]+\(?[A-z]+\)?$/;
+        var message = '';
+    }
+    if(value.length > 2 && value.length < 256 && value != '' && rv_name.test(value))
     {
         obj.removeClass('error');
         obj.addClass('not_error');
@@ -13,7 +38,7 @@ function textValidation(obj,value)
     }
     else{
         obj.removeClass('not_error').addClass('error');
-        obj.next('.error-box').html('Invalid input <br /> * min quantity of letters - 2 <br /> * without spaces symobls')
+        obj.next('.error-box').html('Incorrect ' + obj.attr('placeholder') + ' input. <br>'+message)
             .css('color','#d59563')
             .animate({'paddingLeft':'10px'},400)
             .animate({'paddingLeft':'5px'},400);
@@ -64,27 +89,11 @@ function emailValidation(obj,value)
 }
 function phoneValidation(obj,value)
 {
-    var rv_name = /[+1][\s](\(\d{3}\)[\s ])(\d{3}[\-]\d{4})/;
 
-    if(value != '' && rv_name.test(value))
-    {
-        obj.removeClass('error');
-        obj.addClass('not_error');
-        obj.next('.error-box').text('accepted')
-            .css('color','green')
-            .animate({'paddingLeft':'10px'},400)
-            .animate({'paddingLeft':'5px'},400);
-    }
-    else{
-        obj.removeClass('not_error').addClass('error');
-        obj.next('.error-box').html('Invalid input <br /> * not right format')
-            .css('color','#d59563')
-            .animate({'paddingLeft':'10px'},400)
-            .animate({'paddingLeft':'5px'},400);
-    }
 }
 function textareaValidation(obj,value)
 {
+    var message = 'Your message must not exceed 1000 characters';
     if(value !='' && value.length <= 1000) {
         obj.removeClass('error');
         obj.addClass('not_error');
@@ -95,31 +104,10 @@ function textareaValidation(obj,value)
     }
     else{
         obj.removeClass('not_error').addClass('error');
-        obj.next('.error-box').html('Invalid input text <br /> * too many or too low letters <br /> * min - 2, max - 1000')
+        obj.next('.error-box').html(message)
             .css('color','#d59563')
             .animate({'paddingLeft':'10px'},400)
             .animate({'paddingLeft':'5px'},400);
     }
 }
-function fileValidation(obj,value)
-{
-    if(value != '')
-    {
-        obj.addClass('not_error');
-        obj.next('.error-box').text('accepted')
-            .css('color', 'green')
-            .animate({'paddingLeft': '10px'}, 400)
-            .animate({'paddingLeft': '5px'}, 400);
-    }
-    else{
-        obj.removeClass('not_error').addClass('error');
-        obj.next('.error-box').html('File input error <br /> * set your photo please')
-            .css('color','#d59563')
-            .animate({'paddingLeft':'10px'},400)
-            .animate({'paddingLeft':'5px'},400);
-    }
-}
-function dataValidetion()
-{
-    
-}
+

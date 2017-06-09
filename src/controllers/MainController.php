@@ -10,7 +10,7 @@ class MainController extends Controller
 	public function indexAction()
 	{
 		$uri = explode('/',$_SERVER['REQUEST_URI']);
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\first-form.php');
+        $file = file_get_contents('views/first-form.php');
 		$ajax = $uri[count($uri)-1];
 		if($ajax == 'ajax')
 		{
@@ -22,11 +22,11 @@ class MainController extends Controller
 		}
 
 	}
-    public function secondFormAction()
+	public function secondFormAction()
     {
         $uri = explode('/',$_SERVER['REQUEST_URI']);
         $ajax = $uri[count($uri)-1];
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\second-form.php');
+        $file = file_get_contents('http://solodukhin-as.groupbwt.com/views/second-form.php');
 		if($ajax == 'ajax')
 		{
 //            echo $file;
@@ -56,38 +56,32 @@ class MainController extends Controller
 
 
     }
-    public function secondDataAction()
-	{
-        $uri = explode('/',$_SERVER['REQUEST_URI']);
-        $ajax = $uri[count($uri)-1];
-        $file = file_get_contents('C:\xampp\htdocs\registration-form\src\views\social.php');
-        if($ajax == 'ajax')
-        {
-            $status = MainController::checkSecondFormDataAction();
-            $email = $_SESSION['email'];
+    public function secondDataAction() {
+	    $uri  = explode( '/', $_SERVER['REQUEST_URI'] );
+	    $ajax = $uri[ count( $uri ) - 1 ];
+	    $file = file_get_contents( 'http://solodukhin-as.groupbwt.com/views/social.php' );
 
-            if(is_string($status))
-            {
-            	echo $status;
-            }
-            else{
-	            $LoginModel = new LoginModel();
-	            $answer = $LoginModel -> updateMember($status,$email);
-	            if($answer != false)
-	            {
-		            echo $file;
-	            }
-	            else{
-		            echo '<span class="error">data base request error</span>';
-	            }
-            }
-        }
+	    if ( $ajax == 'ajax' ) {
+		    if(isset( $_POST ))
+		    {
+			    $data = $_POST;
+			    $email      = $_SESSION['email'];
+			    $LoginModel = new LoginModel();
+			    $LoginModel->updateMember( $data, $email );
+			    echo $file;
+		    }
+		    else{
+				echo $file;
+		    }
+
+         }
         else
         {
-//	        $this->view->generate('home','index.php',$file);
+	        //$this->view->generate('home','index.php',$file);
             header('Location: http://form.local/');
         }
 	}
+
     public function uploadPhotoAction()
     {
 
@@ -125,21 +119,21 @@ class MainController extends Controller
 
 	    $data = [];
 
-		if(textValidation($_POST['first_name']) == true)
+		if(nameValidation($_POST['first_name']) == true)
 		{
 			$data['first_name'] = $_POST['first_name'];
 		}
 		else{
 			return 'First name error';
 		}
-	    if(textValidation($_POST['last_name']) == true)
+	    if(nameValidation($_POST['last_name']) == true)
 	    {
 		    $data['last_name'] = $_POST['last_name'];
 	    }
 	    else{
 		    return 'Last name error';
 	    }
-	    if (textValidation($_POST['report_subject']) == true)
+	    if (reportValidation($_POST['report_subject']) == true)
 	    {
 		    $data['report_subject'] = $_POST['report_subject'];
 	    }
@@ -176,33 +170,7 @@ class MainController extends Controller
 		//$login_model = new LoginModel();
     }
 
-    public static function checkSecondFormDataAction()
-    {
-    	$data = [];
-    	$data['photo'] = $_POST['photo'];
-		if(textareaValidation($_POST['company']) == true)
-		{
-			$data['company'] = $_POST['company'];
-		}
-		else{
-			return 'Company error';
-		}
-		if(textareaValidation($_POST['position']) == true)
-		{
-			$data['position'] = $_POST['position'];
-		}
-		else{
-			return 'Position error';
-		}
-		if(textareaValidation($_POST['about']) == true)
-		{
-			$data['about'] = $_POST['about'];
-		}
-		else{
-			return 'About error';
-		}
-		return $data;
-    }
+
     public function checkEmailAction()
     {
 		$loginModel = new LoginModel();
@@ -221,13 +189,31 @@ class MainController extends Controller
     }
     public function allMembersAction()
     {
+		$uri = explode('/',$_SERVER['REQUEST_URI']);
+		$tab = $uri[count($uri)-1];
+
+		if($tab == 0)
+		{
+			$index = 0;
+		}else{
+			$index = $tab * 5;
+		}
+
     	$loginModel = new LoginModel();
-    	$data = $loginModel -> getAllItems('members');
-    	if($data == false)
+    	$members = $loginModel -> getLastTenMembers($index);
+
+	    $row = $loginModel -> foundRows();
+
+    	if($members == false)
 	    {
 		    $data = '<span class="error">data base request error</span>';
 	    }
+	    else{
+    		$data['members'] = $members;
+		    $data['tabs'] = $row[0]['FOUND_ROWS()']/5;
+	    }
 	    $this -> view -> generate('all members', 'all_members.php',$data);
     }
+  
 }
  ?>

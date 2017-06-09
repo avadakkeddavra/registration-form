@@ -7,7 +7,15 @@
  */
 function textValidation($src)
 {
-	return preg_match('/^[a-zA-Zа-яА-Я]+$/', $src);
+	return preg_match('/^([A-z]+[\']?)[A-z]+$/', $src);
+}
+function  nameValidation($src)
+{
+	return preg_match('/^[A-z]+[\']?[A-z]+$/', $src);
+}
+function reportValidation($src)
+{
+	return preg_match('/^(([A-z]*[\'?]?)[\s]?[A-z]*)*$/', $src);
 }
 function phoneValidation($src)
 {
@@ -20,13 +28,4 @@ function emailValidation($src)
 function dateValidation($src)
 {
 	return preg_match('/[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])/', $src);
-}
-function textareaValidation($src)
-{
-	if($src != '' && strlen($src) <= 1000)
-	{
-		return true;
-	}else{
-		return false;
-	}
 }

@@ -26,6 +26,14 @@
 					WHERE email = :email";
         	return self::$query->execute($sql,$data);
         }
+        public function getLastTenMembers($from)
+        {
+	        return self::$query->queryAll('SELECT SQL_CALC_FOUND_ROWS * FROM members ORDER by id DESC LIMIT ' . $from . ' , 5 ');
+        }
+        public function foundRows()
+        {
+        	return self::$query->queryAll('SELECT FOUND_ROWS()');
+        }
 
     }
     /**
